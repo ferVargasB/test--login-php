@@ -2,6 +2,7 @@
 <html>
 <head>
   <?php
+    include_once '../back/sesion.php';
     include_once 'templates/head.php'; 
   ?>
 </head>

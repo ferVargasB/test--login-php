@@ -64,6 +64,7 @@
 
                 session_start();
                 $_SESSION['usuario'] = $usuario['mail'];
+                echo var_dump($_SESSION);
                 header('Location:../ui/sucess_login.php');
 
             } else {

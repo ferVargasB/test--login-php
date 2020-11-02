@@ -2,6 +2,16 @@
 <html>
 <head>
   <?php
+    session_start();
+    $cerrar_sesion = $_GET["cerrar_sesion"];
+    if ($cerrar_sesion)
+    {
+      session_destroy();
+    }
+    if ( isset($_SESSION['usuario']) )
+    {
+      header('Location:sucess_login.php');
+    }  
     include_once 'templates/head.php'; 
   ?>
 </head>
