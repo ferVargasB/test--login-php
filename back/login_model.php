@@ -61,7 +61,11 @@
             }
 
             if ( $usuario['password'] == $cleaned_password ){
+
+                session_start();
+                $_SESSION['usuario'] = $usuario['mail'];
                 header('Location:../ui/sucess_login.php');
+
             } else {
                 header('Location:../ui/login.php?error=1');
             }
