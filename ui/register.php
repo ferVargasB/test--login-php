@@ -11,6 +11,13 @@
   <div class="login-logo">
     <a href=""><b>Nuevo</b> Registro</a>
   </div>
+  <?php
+    if ( isset($_GET['mail']) ){ ?>
+      <div class="alert alert-danger alert-dismissible">
+        <h3><i class="icon fas fa-ban"></i> Error!</h3>
+        Ocurrió un error, el correo ya existe
+      </div>
+  <?php } ?>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">

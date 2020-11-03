@@ -9,15 +9,29 @@
             $cleaned_mail = trim( $_POST['mail'] );
             $cleaned_password = trim( $_POST['password'] );
 
-            $conexion = $objetoPDO->prepare("INSERT INTO user(mail,password) VALUES(:mail,:password)");
+            //Verificar si existe el correo
+            $conexion = $objetoPDO->prepare("SELECT mail,password FROM user WHERE mail = :mail;");
             $conexion->bindParam(":mail",$cleaned_mail);
-            $conexion->bindParam(":password",$cleaned_password);
 
-            if ( !$conexion->execute() ){
-                throw new Exception('Ocurrió un error, intentar mas tarde');
+            $conexion->execute();
+            $usuario = $conexion->fetch(PDO::FETCH_ASSOC);
+
+            if ( $usuario ){
+                header('Location:../ui/register.php?mail=true');
+            } else {
+                //Realizar registro
+                $conexion = $objetoPDO->prepare("INSERT INTO user(mail,password) VALUES(:mail,:password)");
+                $conexion->bindParam(":mail",$cleaned_mail);
+                $conexion->bindParam(":password",$cleaned_password);
+
+                if ( !$conexion->execute() ){
+                    throw new Exception('Ocurrió un error, intentar mas tarde');
+                }
+
+                header("Location:../ui/exito.php");
             }
 
-            header("Location:../ui/exito.php");
+
 
         } elseif ( isset($_POST['recuperar']) ){
             
